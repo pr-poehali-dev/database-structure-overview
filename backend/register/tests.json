@@ -1,0 +1,59 @@
+{
+  "tests": [
+    {
+      "name": "Successful registration",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "testuser_new_456",
+        "email": "testnew456@example.com",
+        "password": "SecurePass123",
+        "age_confirmed": true,
+        "first_name": "Test",
+        "last_name": "User"
+      },
+      "expectedStatus": 201,
+      "expectedBody": {
+        "id": "number",
+        "username": "testuser_new_456",
+        "email": "testnew456@example.com",
+        "first_name": "Test",
+        "last_name": "User",
+        "created_at": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Weak password validation",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "testuser456",
+        "email": "test2@example.com",
+        "password": "weak",
+        "age_confirmed": true
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Missing age confirmation",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "username": "testuser789",
+        "email": "test3@example.com",
+        "password": "SecurePass123",
+        "age_confirmed": false
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

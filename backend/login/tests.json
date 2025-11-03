@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "Missing credentials",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "login": "",
+        "password": ""
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Invalid credentials",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "login": "nonexistent@example.com",
+        "password": "WrongPassword123"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
